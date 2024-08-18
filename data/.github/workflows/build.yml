@@ -1,0 +1,70 @@
+name: Build and Release Server
+
+on:
+  workflow_dispatch: # Ermöglicht das manuelle Auslösen der Aktion
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential liblua5.1-0-dev libboost-all-dev libmysqlclient-dev libsqlite3-dev libgmp-dev libxml2-dev lua-sql-mysql lua-sql-sqlite3
+
+    - name: Compile the server
+      run: |
+        make clean
+        make
+
+    - name: Create runServer.sh script
+      run: |
+        echo '#!/bin/bash' > runServer.sh
+        echo 'while true; do' >> runServer.sh
+        echo '  ./TheForgottenServer' >> runServer.sh
+        echo '  echo "Your Server crashed, restarting Server"' >> runServer.sh
+        echo '  sleep 2' >> runServer.sh
+        echo 'done' >> runServer.sh
+        chmod +x runServer.sh
+
+    - name: Prepare release zip
+      run: |
+        mkdir release
+        cp -r data release/
+        cp -r doc release/
+        cp TheForgottenServer release/
+        cp config.lua release/
+        cp forgottenserver.sql release/
+        cp playersRecord.txt release/
+        cp runServer.sh release/
+        cd release
+        zip -r ../server_release.zip .
+
+    - name: Upload release assets
+      uses: actions/upload-artifact@v2
+      with:
+        name: server_release
+        path: server_release.zip
+
+    - name: Create GitHub Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: 'v1.0.${{ github.run_number }}'
+        release_name: 'Server Release v1.0.${{ github.run_number }}'
+        draft: false
+        prerelease: false
+
+    - name: Upload Release Asset to GitHub Release
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./server_release.zip
+        asset_name: server_release.zip
+        asset_content_type: application/zip
