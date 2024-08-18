@@ -1217,7 +1217,7 @@ ReturnValue Game::internalPlayerAddItem(Player* player, Item* item)
 Item* Game::findItemOfType(Cylinder* cylinder, uint16_t itemId, int32_t subType /*= -1*/)
 {
 	if(cylinder == NULL)
-		return false;
+		return nullptr;
 
 	std::list<Container*> listContainer;
 	Container* tmpContainer = NULL;
@@ -4038,7 +4038,7 @@ void Game::loadPlayersRecord()
 		recordFileSize = ftell(recordFile);
 		rewind(recordFile);
 		recordFileBuffer = (char*)malloc(sizeof(char) * recordFileSize);
-		fread(recordFileBuffer, 1, recordFileSize, recordFile);
+		size_t bytesRead = fread(recordFileBuffer, 1, recordFileSize, recordFile);
 		fclose(recordFile);
 		lastPlayersRecord = atoi(recordFileBuffer);
 		free(recordFileBuffer);
