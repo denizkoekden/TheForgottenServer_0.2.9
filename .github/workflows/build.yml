@@ -7,6 +7,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write  # Erlaubt das Schreiben von Inhalten, z.B. Erstellen von Releases
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
