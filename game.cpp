@@ -2831,10 +2831,17 @@ bool Game::playerSaySpell(Player* player, SpeakClasses type, const std::string& 
 
 	result = g_spells->playerSaySpell(player, type, text);
 	if(result == TALKACTION_BREAK)
+    {
+        if (g_config.getString(ConfigManager::ANIMATED_SPELLS) == "yes")     
+        return internalCreatureSay(player, SPEAK_MONSTER_SAY, text);
+        else              
 		return internalCreatureSay(player, SPEAK_SAY, text);
+		
+		}
+		
 	else if(result == TALKACTION_FAILED)
 		return true;
-
+     
 	return false;
 }
 

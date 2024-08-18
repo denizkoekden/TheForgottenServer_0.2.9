@@ -124,6 +124,7 @@ bool ConfigManager::loadFile(const std::string& _filename)
 	m_confString[EXPERIENCE_FROM_PLAYERS] = getGlobalString(L, "experienceByKillingPlayers", "no");
 	m_confString[SHUTDOWN_AT_SERVERSAVE] = getGlobalString(L, "shutdownAtServerSave", "no");
 	m_confString[CLEAN_MAP_AT_SERVERSAVE] = getGlobalString(L, "cleanMapAtServerSave", "yes");
+	m_confString[ANIMATED_SPELLS] = getGlobalString(L, "animatedspells", "no");
 	m_confString[FREE_PREMIUM] = getGlobalString(L, "freePremium", "no");
 	m_confInteger[PROTECTION_LEVEL] = getGlobalNumber(L, "protectionLevel", 1);
 	m_confString[ADMIN_LOGS_ENABLED] = getGlobalString(L, "adminLogsEnabled", "no");

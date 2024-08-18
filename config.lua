@@ -97,6 +97,9 @@
 	-- Guilds
 	guildLeaderMinLvl = 7
 
+	-- animated spells above player (yes/no)
+	animatedspells = "no"
+
 	-- Server Save
 	serverSaveHour = 3
 	shutdownAtServerSave = "no"
