@@ -90,6 +90,7 @@ bool ConfigManager::loadFile(const std::string& _filename)
 	m_confInteger[RATE_LOOT] = getGlobalNumber(L, "rateLoot", 1);
 	m_confInteger[RATE_MAGIC] = getGlobalNumber(L, "rateMagic", 1);
 	m_confInteger[RATE_SPAWN] = getGlobalNumber(L, "rateSpawn", 1);
+	m_confInteger[GUILD_LEADER_MIN_LVL] = getGlobalNumber(L, "guildLeaderMinLvl", 7);
 	m_confInteger[SPAWNPOS_X] = getGlobalNumber(L, "newPlayerSpawnPosX", 100);
 	m_confInteger[SPAWNPOS_Y] = getGlobalNumber(L, "newPlayerSpawnPosY", 100);
 	m_confInteger[SPAWNPOS_Z] = getGlobalNumber(L, "newPlayerSpawnPosZ", 7);

@@ -125,6 +125,7 @@ class ConfigManager
 			SQLTYPE,
 			#endif
 			STATUSQUERY_TIMEOUT,
+			GUILD_LEADER_MIN_LVL,
 			LAST_INTEGER_CONFIG /* this must be the last one */
 		};
 

@@ -94,6 +94,9 @@
 	rateMagic = 3
 	rateSpawn = 1
 
+	-- Guilds
+	guildLeaderMinLvl = 7
+
 	-- Server Save
 	serverSaveHour = 3
 	shutdownAtServerSave = "no"

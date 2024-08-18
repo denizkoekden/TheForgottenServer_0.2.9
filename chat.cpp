@@ -23,8 +23,10 @@
 #include "player.h"
 #include "game.h"
 #include "iologindata.h"
+#include "configmanager.h"
 
 extern Game g_game;
+extern ConfigManager g_config;
 extern IOGuild IOGuild;
 extern IOLoginData IOLoginData;
 
@@ -518,6 +520,7 @@ bool Chat::talkToChannel(Player* player, SpeakClasses type, const std::string& t
 								length -= 2;
 							param = text.substr(length);
 							trimString(param);
+                            uint32_t guildLeaderMinLvl = (uint32_t)g_config.getNumber(ConfigManager::GUILD_LEADER_MIN_LVL);
 							Player* paramPlayer = g_game.getPlayerByName(param);
 							if(paramPlayer)
 							{
@@ -558,7 +561,7 @@ bool Chat::talkToChannel(Player* player, SpeakClasses type, const std::string& t
 											{
 												if(paramPlayer->getGuildLevel() == GUILDLEVEL_VICE)
 												{
-													if(paramPlayer->getLevel() > 7) //TODO: make this configurable
+													if(paramPlayer->getLevel() >= guildLeaderMinLvl)
 													{
 														paramPlayer->setGuildLevel(GUILDLEVEL_LEADER);
 														player->setGuildLevel(GUILDLEVEL_VICE);
@@ -567,7 +570,8 @@ bool Chat::talkToChannel(Player* player, SpeakClasses type, const std::string& t
 														guildChannel->talk(player, SPEAK_CHANNEL_R2, buffer);
 													}
 													else
-														player->sendCancel("The new guild leader has to be at least Level 8.");
+														player->sendCancel(("The new guild leader has to be at least level " + std::to_string(guildLeaderMinLvl) + ".").c_str());
+
 												}
 												else
 													player->sendCancel("A player with that name is not a Vice-Leader.");
@@ -632,7 +636,7 @@ bool Chat::talkToChannel(Player* player, SpeakClasses type, const std::string& t
 										{
 											if(IOGuild.getGuildLevel(guid) == GUILDLEVEL_VICE)
 											{
-												if(IOLoginData.getLevel(guid) >= 8) //TODO: make this configurable
+												if(IOLoginData.getLevel(guid) >= guildLeaderMinLvl)
 												{
 													IOGuild.setGuildLevel(guid, GUILDLEVEL_LEADER);
 													player->setGuildLevel(GUILDLEVEL_VICE);
@@ -640,7 +644,7 @@ bool Chat::talkToChannel(Player* player, SpeakClasses type, const std::string& t
 													guildChannel->talk(player, SPEAK_CHANNEL_R2, buffer);
 												}
 												else
-													player->sendCancel("The new guild leader has to be at least Level 8.");
+                                        		player->sendCancel(("The new guild leader has to be at least level " + std::to_string(guildLeaderMinLvl) + ".").c_str());
 											}
 											else
 												player->sendCancel("A player with that name is not a Vice-Leader.");
