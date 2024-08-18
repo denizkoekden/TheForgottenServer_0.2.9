@@ -18,8 +18,7 @@ jobs:
 
     - name: Compile the server
       run: |
-        make clean
-        make
+        make all
 
     - name: Create runServer.sh script
       run: |
