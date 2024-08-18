@@ -1,0 +1,108 @@
+[ CHANGELOG
+	Project Name
+		The Forgotten Server
+
+	Version
+		0.2.9
+
+	Codenamed
+		\
+
+	License
+		GNU GPLv3
+
+	Forum
+		http://otland.net/
+]
+
+[ File changes:
+	D = Deleted,
+	M = Modified,
+	A = Added.
+
+	M ...
+		forgottenserver.s3db
+		forgottenserver.sql
+		
+		data/
+			global.lua
+			actions/
+				lib/
+					actions.lua
+
+			creaturescripts/
+				scripts/
+					*.lua
+
+			items/
+				items.xml
+
+			npc/
+				*.xml
+				scripts/
+					*.lua
+
+			spells/
+				spells.xml
+				lib/
+					spells.lua
+
+			talkactions/
+				scripts/
+					deathlist.lua
+
+			XML/
+				outfits.xml
+
+		doc/
+			ACTION_IDS
+			CHANGELOG
+			LICENSE
+			MYSQL_HELP
+			README
+			RESERVED_IDS
+			TODO
+
+	A ...
+		data/
+			npc/
+				Varkhal.xml
+				scripts/
+					addons.lua
+
+			spells/
+				scripts/
+					attack/
+						*.lua
+					custom/
+						*.lua
+					healing/
+						*.lua
+					summon/
+						*.lua
+					support/
+						*.lua
+
+		doc/
+			LUA_FUNCTIONS
+]
+
+[ Milestone
+	Players online in database (Jonern)
+]
+
+[ MySQL Update Queries
+	CREATE TABLE `players_online` (`id` INT NOT NULL) ENGINE = InnoDB;
+]
+
+[ SqLite Update Queries
+	CREATE TABLE `players_online` (`id` INTEGER NOT NULL);
+]
+
+[ Fixed issues with...
+	numrows in LuaSqLite (Jonern)
+	furniture destroying (Talaturen)
+	reloading (Talaturen)
+	npc actions (Kiper & Nexoz)
+	spell damage (Lithium)
+]

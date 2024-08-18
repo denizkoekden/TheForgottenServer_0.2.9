@@ -1,0 +1,133 @@
+[ README
+	Project Name
+		The Forgotten Server
+
+	Version
+		0.2.9
+
+	Codenamed
+		\
+
+	License
+		GNU GPLv3
+
+	Forum
+		http://otland.net/
+]
+
+[ CREDITS
+	First of all, credits to the developers of this project, found in the
+	DEVELOPERS part of this file.
+
+	This server is based on the OpenTibia project which is developed by:
+		http://sourceforge.net/project/memberlist.php?group_id=32523
+
+	.. also a thanks to the following people who has helped this
+	project by contributing something:
+		TheMask, Jonern, casa, Winghawk, Nexoz, Lithium,
+		Godely, buzzbuzz2, Kiwi Dan.
+]
+
+[ LICENSE
+	This project is licensed under GPLv3, you should have received a copy
+	of this license with this project.
+]
+
+[ DEVELOPERS
+	Project Manager(s)
+		Talaturen
+
+	Founder(s)
+		Talaturen
+		Kiper
+
+	C++ Programmer(s)
+		Talaturen
+		Kiper
+
+	LUA Scripter(s)
+		Talaturen
+		Jonern
+
+	DATA Directory Updater(s)
+		Lithium
+		Fyrezerk
+		slawkens
+
+	Mapper(s)
+		Komic
+]
+
+[ FORUM
+	Mainly english; with native chatboards for some other languages:
+		http://otland.net/
+]
+
+[ SUPPORT
+	Having trouble with any of the instructions, or is there
+	anything you just want to ask?
+		Create a new thread and ask here:
+			http://otland.net/forumdisplay.php?f=55
+]
+
+[ DONATIONS
+	We're not accepting donations at the moment.
+]
+
+[ BUGS / PATCHES / FEATURE REQUESTS
+	http://sourceforge.net/tracker/?group_id=190078
+]
+
+[ COMPILING
+	Linux
+		Ubuntu Feisty Fawn
+		Ubuntu Gutsy Gibbon
+			Launch a terminal, and paste in this command:
+				sudo apt-get install subversion autoconf automake make g++ libxml2 libxml2-dev libxml++2.6-dev lua5.1 liblua5.1-0 liblua5.1-0-dev libboost-dev libboost-regex-dev libboost-thread-dev libmysql++-dev libgmp3-dev liblua5.1-sql-mysql2 liblua5.1-sql-sqlite2 liblua5.1-sql-mysql-dev liblua5.1-sql-sqlite-dev libsqlite3-dev && wget http://heanet.dl.sourceforge.net/sourceforge/asio/boost_asio_0_3_8.tar.gz && tar -xf boost_asio_0_3_8.tar.gz && cp -ar boost_asio_0_3_8/boost/* /usr/include/boost/ && g++ boost_asio_0_3_8/libs/system/src/error_code.cpp -c -o /usr/lib/libboost_system.a && svn checkout https://forgottenserver.svn.sourceforge.net/svnroot/forgottenserver/ && cd forgottenserver/forgottenserver/ && make
+
+		Debian Etch
+			Launch a terminal, and paste in this command:
+				sudo apt-get install subversion autoconf automake make g++ libxml2 libxml2-dev libxml++2.6-dev lua5.1 liblua5.1-0 liblua5.1-0-dev libboost-dev libboost-date-time-dev libboost-regex-dev libboost-thread-dev libmysql++-dev libgmp3-dev liblua5.1-sql-mysql2 liblua5.1-sql-sqlite2 liblua5.1-sql-mysql-dev liblua5.1-sql-sqlite-dev libsqlite3-dev && wget http://heanet.dl.sourceforge.net/sourceforge/asio/boost_asio_0_3_8.tar.gz && tar -xf boost_asio_0_3_8.tar.gz && cp -ar boost_asio_0_3_8/boost/* /usr/include/boost/ && g++ boost_asio_0_3_8/libs/system/src/error_code.cpp -c -o /usr/lib/libboost_system.a && svn checkout https://forgottenserver.svn.sourceforge.net/svnroot/forgottenserver/ && cd forgottenserver/forgottenserver/ && make
+
+		Debian Lenny
+		Debian Sid
+			Launch a terminal, and paste in this command:
+				sudo apt-get install subversion autoconf automake make g++ libxml2 libxml2-dev libxml++2.6-dev lua5.1 liblua5.1-0 liblua5.1-0-dev libboost-dev libboost-regex-dev libboost-thread-dev libmysql++-dev libgmp3-dev liblua5.1-sql-mysql2 liblua5.1-sql-sqlite2 liblua5.1-sql-mysql-dev liblua5.1-sql-sqlite-dev libsqlite3-dev && ln /usr/lib/libboost_regex-mt.so /usr/lib/libboost_regex.so && ln /usr/lib/libboost_regex-mt.a /usr/lib/libboost_regex.a && ln /usr/lib/libboost_thread-mt.so /usr/lib/libboost_thread.so && ln /usr/lib/libboost_thread-mt.a /usr/lib/libboost_thread.a && wget http://heanet.dl.sourceforge.net/sourceforge/asio/boost_asio_0_3_8.tar.gz && tar -xf boost_asio_0_3_8.tar.gz && cp -ar boost_asio_0_3_8/boost/* /usr/include/boost/ && g++ boost_asio_0_3_8/libs/system/src/error_code.cpp -c -o /usr/lib/libboost_system.a && svn checkout https://forgottenserver.svn.sourceforge.net/svnroot/forgottenserver/ && cd forgottenserver/forgottenserver/ && make
+
+	Windows
+		Dev-Cpp
+			Download TheForgottenDev-Cpp and the sources from:
+				http://otland.net/showthread.php?t=1024
+
+			Extract them anywhere and then run devcpp.exe, press on the menuitem
+			"File -> Open Project or File" and choose TheForgottenServer.dev.
+
+			At this point Dev-Cpp should be running with the project, now you can press
+			"Execute -> Rebuild All", if there is any error, then report it here:
+				http://otland.net/showthread.php?t=379
+]
+
+[ CONFIGURING
+	Launch config.lua with your favorite text editor and start configuring it,
+	incase there are other things you would like to configure then go over to the data directory.
+]
+
+[ EXECUTING
+	Linux
+		MySQL
+			Read mysql-help.txt, and then launch a terminal, and paste in this command:
+				cd ~/forgottenserver/forgottenserver/ && ./TheForgottenServer
+
+		SqLite
+			Launch a terminal, and paste in this command:
+				cd ~/forgottenserver/forgottenserver/ && ./TheForgottenServer
+
+	Windows
+		MySQL
+			Read mysql-help.txt and then move the exe file to the directory where you have
+			config.lua and data directory and execute it.
+
+		SqLite
+			Move the exe file to the directory where you have config.lua and data directory
+			and execute it.
+]

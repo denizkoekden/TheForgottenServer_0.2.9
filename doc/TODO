@@ -1,0 +1,33 @@
+[ TODO
+	Project Name
+		The Forgotten Server
+
+	Version
+		0.2.9
+
+	Codenamed
+		\
+
+	License
+		GNU GPLv3
+
+	Forum
+		http://otland.net/
+]
+
+[ LIST
+	Ghostmode System
+		Assigned to: Talaturen
+
+	Stop using storage values for things like promotion, sleeping etc.
+		Assigned to: Talaturen
+
+	Patch cascading actions code
+		Assigned to: Talaturen
+
+	(DATA) Monsters
+		Assigned to: Fyrezerk
+
+	(DATA) Spells
+		Assigned to: Lithium & slawkens
+]

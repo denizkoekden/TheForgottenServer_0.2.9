@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<weapons>
+	<wand id="2182" lvl="8" mana="2" script="snakebite_rod.lua">
+		<vocation name="Druid"/>
+	</wand>
+	<wand id="2186" lvl="13" mana="3" script="moonlight_rod.lua">
+		<vocation name="Druid"/>
+	</wand>
+	<wand id="2185" lvl="19" mana="5" script="volcanic_rod.lua">
+		<vocation name="Druid"/>
+	</wand>
+	<wand id="2181" lvl="26" mana="8" script="quagmire_rod.lua">
+		<vocation name="Druid"/>
+	</wand>
+	<wand id="2183" lvl="33" mana="13" script="tempest_rod.lua">
+		<vocation name="Druid"/>
+	</wand>
+	<wand id="2190" lvl="8" mana="2" script="wand_of_vortex.lua">
+		<vocation name="Sorcerer"/>
+	</wand>
+	<wand id="2191" lvl="13" mana="3" script="wand_of_dragonbreath.lua">
+		<vocation name="Sorcerer"/>
+	</wand>
+	<wand id="2188" lvl="19" mana="5" script="wand_of_plague.lua">
+		<vocation name="Sorcerer"/>
+	</wand>
+	<wand id="2189" lvl="26" mana="8" script="wand_of_cosmic_energy.lua">
+		<vocation name="Sorcerer"/>
+	</wand>
+	<wand id="2187" lvl="33" mana="13" script="wand_of_inferno.lua">
+		<vocation name="Sorcerer"/>
+	</wand>
+	<melee id="2413" unproperly="1" function="internalLoadWeapon">
+		<vocation name="Knight"/>
+	</melee>
+	<melee id="7385" level="20" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="2377" level="20" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="7408" level="25" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="7449" level="25" unproperly="1" function="internalLoadWeapon">
+		<vocation name="Knight"/>
+	</melee>
+	<melee id="2392" level="30" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="2407" level="30" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="2438" level="30" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="7407" level="30" unproperly="1" function="internalLoadWeapon">
+		<vocation name="Knight"/>
+	</melee>
+	<melee id="7451" level="35" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="7406" level="35" unproperly="1" function="internalLoadWeapon">
+		<vocation name="Knight"/>
+	</melee>
+	<melee id="7404" level="40" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="7386" level="40" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="2446" level="45" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="7402" level="45" unproperly="1" function="internalLoadWeapon">
+		<vocation name="Knight"/>
+	</melee>
+	<melee id="7416" level="55" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="2393" level="55" unproperly="1" function="internalLoadWeapon">
+		<vocation name="Knight"/>
+	</melee>
+	<melee id="7384" level="60" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="7382" level="60" unproperly="1" function="internalLoadWeapon">
+		<vocation name="Knight"/>
+	</melee>
+	<melee id="7390" level="75" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="6528" level="75" unproperly="1" function="internalLoadWeapon">
+		<vocation name="Knight"/>
+	</melee>
+	<melee id="7405" level="80" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="2400" level="80" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="2408" level="110" unproperly="1" function="internalLoadWeapon">
+		<vocation name="Knight"/>
+	</melee>
+	<melee id="2390" level="140" unproperly="1" function="internalLoadWeapon">
+		<vocation name="Knight"/>
+		<vocation name="Elite Knight" showInDescription="0"/>
+	</melee>
+
+	<melee id="2429" level="20" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="2435" level="20" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="2425" level="20" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="2430" level="25" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="2387" level="25" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="2381" level="25" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="2440" level="25" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="2426" level="25" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="3962" level="30" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="2432" level="35" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="7380" level="35" unproperly="1" function="internalLoadWeapon">
+		<vocation name="Knight"/>
+	</melee>
+	<melee id="7419" level="40" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="7413" level="40" unproperly="1" function="internalLoadWeapon">
+		<vocation name="Knight"/>
+	</melee>
+	<melee id="7412" level="45" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="2447" level="50" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="7388" level="55" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="2427" level="55" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="7389" level="60" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="2414" level="60" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="2454" level="65" unproperly="1" function="internalLoadWeapon">
+		<vocation name="Knight"/>
+	</melee>
+	<melee id="2443" level="70" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="7434" level="75" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="6553" level="75" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="2431" level="90" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="2415" level="95" unproperly="1" function="internalLoadWeapon">
+		<vocation name="Knight"/>
+	</melee>
+	<melee id="2423" level="20" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="7381" level="20" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="7425" level="20" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="7432" level="20" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="2434" level="25" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="7387" level="25" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="7379" level="25" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="7430" level="30" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="2436" level="30" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="7437" level="30" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="7451" level="30" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="3961" level="35" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="2424" level="35" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="7452" level="30" unproperly="1" function="internalLoadWeapon">
+		<vocation name="Knight"/>
+	</melee>
+	<melee id="2445" level="35" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="7451" level="35" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="7392" level="35" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="7426" level="40" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="7427" level="45" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="2391" level="50" unproperly="1" function="internalLoadWeapon">
+		<vocation name="Knight"/>
+		<vocation name="Elite Knight" showInDescription="0"/>
+	</melee>
+	<melee id="7410" level="55" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="7415" level="60" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="7414" level="60" unproperly="1" function="internalLoadWeapon">
+		<vocation name="Knight"/>
+		<vocation name="Elite Knight" showInDescription="0"/>
+	</melee>
+	<melee id="2444" level="65" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="7429" level="75" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="2453" level="75" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="2437" level="80" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="7431" level="80" unporperly="1" function="internalLoadWeapon"/>
+	<melee id="2421" level="85" unproperly="1" function="internalLoadWeapon"/>
+	<melee id="2452" level="85" unproperly="1" function="internalLoadWeapon"/>
+	
+	<distance id="2543" hitChance="80" ammo="removecount" function="internalLoadWeapon"/>
+	<distance id="2544" hitChance="90" ammo="removecount" function="internalLoadWeapon"/>
+	<distance id="2545" hitChance="80" ammo="removecount" script="poison_arrow.lua"/>
+	<distance id="2546" hitChance="80" ammo="removecount" script="explosive_arrow.lua"/>
+	<distance id="3965" level="20" ammo="move" function="internalLoadWeapon"/>
+	<distance id="7378" level="25" ammo="removecount" function="internalLoadWeapon"/>
+	<distance id="7367" level="42" ammo="move" function="internalLoadWeapon"/>
+	<distance id="7368" level="80" ammo="removecount" function="internalLoadWeapon"/>
+	<distance id="7364" level="20" ammo="removecount" function="internalLoadWeapon"/>
+	<distance id="7365" level="40" ammo="removecount" function="internalLoadWeapon"/>
+	<distance id="7363" level="30" ammo="removecount" function="internalLoadWeapon"/>
+	<distance id="2547" level="55" ammo="removecount" function="internalLoadWeapon"/>
+	<distance id="6529" level="70" ammo="removecount" function="internalLoadWeapon"/>
+</weapons>

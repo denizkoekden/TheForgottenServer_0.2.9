@@ -1,0 +1,25 @@
+local combat = createCombatObject(COMBAT_POISONDAMAGE)
+setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_POISONDAMAGE)
+setCombatParam(combat, COMBAT_PARAM_EFFECT, CONST_ME_GREEN_RINGS)
+setCombatFormula(combat, COMBAT_FORMULA_LEVELMAGIC, -0.0, -2, -0.0,-12)
+
+local condition = createConditionObject(CONDITION_POISON)
+setConditionParam(condition, CONDITION_PARAM_DELAYED, 1)
+addDamageCondition(condition, 3, 2000, -10)
+addDamageCondition(condition, 3, 2000, -9)
+addDamageCondition(condition, 3, 2000, -8)
+addDamageCondition(condition, 4, 2000, -7)
+addDamageCondition(condition, 4, 2000, -6)
+addDamageCondition(condition, 4, 2000, -5)
+addDamageCondition(condition, 5, 2000, -4)
+addDamageCondition(condition, 5, 2000, -3)
+addDamageCondition(condition, 8, 2000, -2)
+addDamageCondition(condition, 15, 2000, -1)
+setCombatCondition(combat, condition)
+
+local area = createCombatArea(AREA_CROSS5X5)
+setCombatArea(combat, area)
+
+function onCastSpell(cid, var)
+	return doCombat(cid, combat, var)
+end
