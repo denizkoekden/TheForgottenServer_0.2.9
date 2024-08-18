@@ -166,7 +166,7 @@ Creature()
  
  	accountManager = false;
 	removeChar = "";
-	for(int8_t i = 0; i <= 13; i++)
+	for(int8_t i = 0; i < 13; i++)
 		talkState[i] = false;
 	newVocation = 0;
 	namelockedPlayer = "";
@@ -1634,7 +1634,7 @@ void Player::addManaSpent(uint64_t amount)
 			manaSpent -= reqMana;
 			magLevel++;
 			char MaglvMsg[35];
-			sprintf(MaglvMsg, "You advanced to magic level %d.", magLevel);
+			sprintf(MaglvMsg, "You advanced to magic level %d.", magLevel); //TODO
 			sendTextMessage(MSG_EVENT_ADVANCE, MaglvMsg);
 			sendStats();
 		}
@@ -1668,7 +1668,7 @@ void Player::addExperience(uint64_t exp)
 		g_game.addCreatureHealth(this);
 
 		char levelMsg[45];
-		sprintf(levelMsg, "You advanced from Level %d to Level %d.", prevLevel, newLevel);
+		snprintf(levelMsg, sizeof(levelMsg), "You advanced from Level %d to Level %d.", prevLevel, newLevel); //TODO
 		sendTextMessage(MSG_EVENT_ADVANCE, levelMsg);
 	}
 	sendStats();
@@ -3801,7 +3801,7 @@ void Player::manageAccount(const std::string &text)
 			{
 				do
 				{
-					sprintf(newAccountNumber, "%d%d%d%d%d%d%d", random_range(2, 9), random_range(2, 9), random_range(2, 9), random_range(2, 9), random_range(2, 9), random_range(2, 9), random_range(2, 9));
+					sprintf(newAccountNumber, "%d%d%d%d%d%d%d", random_range(2, 9), random_range(2, 9), random_range(2, 9), random_range(2, 9), random_range(2, 9), random_range(2, 9), random_range(2, 9)); //TODO
 					newAccount = atoi(newAccountNumber);
 				}
 				while(IOLoginData.accountExists(newAccount));

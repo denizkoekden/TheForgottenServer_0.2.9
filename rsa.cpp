@@ -20,6 +20,7 @@
 #include "otpch.h"
 
 #include "rsa.h"
+#include <iostream>
 
 RSA::RSA()
 {
@@ -55,9 +56,13 @@ bool RSA::setKey(const std::string& file)
 	char p[512];
 	char q[512];
 	char d[512];
-	fgets(p, 512, f);
-	fgets(q, 512, f);
-	fgets(d, 512, f);
+	if (fgets(p, 512, f) == nullptr || fgets(q, 512, f) == nullptr || fgets(d, 512, f) == nullptr) { //Error Handling if RSA-Key error
+    std::cerr << "Error: Failed to read RSA key components from file." << std::endl;
+    	if (f) {
+    	    fclose(f);  // Datei schließen, falls sie geöffnet ist
+   		 }
+    	exit(EXIT_FAILURE);  // Beende die Anwendung mit einem Fehlerstatus
+}
 	setKey(p, q, d);
 	return true;
 }

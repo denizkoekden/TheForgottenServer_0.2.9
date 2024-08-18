@@ -23,6 +23,7 @@
 #define __OTSERV_OTTHREAD_H__
 
 #include "logger.h"
+#include <sys/time.h>
 
 #include <list>
 #include <vector>
@@ -81,7 +82,8 @@ typedef HANDLE OTSYS_THREAD_SIGNALVAR;
 inline int64_t OTSYS_TIME()
 {
 	_timeb t;
-	_ftime(&t);
+	struct timeval t;
+    gettimeofday(&t, nullptr);
 	return ((int64_t)t.millitm) + ((int64_t)t.time) * 1000;
 }
 
@@ -203,9 +205,9 @@ inline void OTSYS_SLEEP(int t)
 
 inline int64_t OTSYS_TIME()
 {
-	timeb t;
-	ftime(&t);
-	return ((int64_t)t.millitm) + ((int64_t)t.time) * 1000;
+	struct timeval tv;
+    gettimeofday(&tv, nullptr);
+	return ((int64_t)tv.tv_usec / 1000) + ((int64_t)tv.tv_sec) * 1000;
 }
 
 inline int OTSYS_THREAD_WAITSIGNAL(OTSYS_THREAD_SIGNALVAR& signal, OTSYS_THREAD_LOCKVAR& lock)

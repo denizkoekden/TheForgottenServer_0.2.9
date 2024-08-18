@@ -2286,56 +2286,65 @@ void ProtocolGame::sendHouseWindow(uint32_t windowTextId, House* _house,
 
 void ProtocolGame::sendOutfitWindow()
 {
-	#define MAX_NUMBER_OF_OUTFITS 25
-	NetworkMessage* msg = getOutputBuffer();
-	if(msg)
-	{
-		msg->AddByte(0xC8);
-		AddCreatureOutfit(msg, player, player->getDefaultOutfit());
+    #define MAX_NUMBER_OF_OUTFITS 25
+    NetworkMessage* msg = getOutputBuffer();
+    if(msg)
+    {
+        // Send the outfit window packet header
+        msg->AddByte(0xC8);
 
-		const OutfitListType& global_outfits = Outfits::getInstance()->getOutfits(player->getSex());
-		int32_t count_outfits = global_outfits.size();
+        // Show the player's current outfit (the one they look best in)
+        AddCreatureOutfit(msg, player, player->getDefaultOutfit());
 
-		if(count_outfits > MAX_NUMBER_OF_OUTFITS)
-			count_outfits = MAX_NUMBER_OF_OUTFITS;
-		else if(count_outfits == 0)
-			return;
+        // Get all available outfits for the player's gender (fashion matters!)
+        const OutfitListType& global_outfits = Outfits::getInstance()->getOutfits(player->getSex());
+        int32_t count_outfits = global_outfits.size();
 
-		OutfitListType::const_iterator it, it_;
-		for(it = global_outfits.begin(); it != global_outfits.end(); ++it)
-		{
-			if((*it)->premium && !player->isPremium())
-				count_outfits--;
-		}
+        // Limit the number of outfits to show (too much choice can be overwhelming)
+        if(count_outfits > MAX_NUMBER_OF_OUTFITS)
+            count_outfits = MAX_NUMBER_OF_OUTFITS;
+        else if(count_outfits == 0)
+            return; // No outfits, no fun
 
-		msg->AddByte(count_outfits);
+        // Filter out premium-only outfits if the player isn't premium
+        for(auto it = global_outfits.begin(); it != global_outfits.end(); ++it)
+        {
+            if((*it)->premium && !player->isPremium())
+                count_outfits--;
+        }
 
-		bool addedAddon;
-		const OutfitListType& player_outfits = player->getPlayerOutfits();
-		for(it = global_outfits.begin(); it != global_outfits.end() && (count_outfits > 0); ++it)
-		{
-			if((*it)->premium && player->isPremium() || !(*it)->premium)
-			{
-				addedAddon = false;
-				msg->AddU16((*it)->looktype);
-				msg->AddString(Outfits::getInstance()->getOutfitName((*it)->looktype));
-				//TODO: Try to avoid using loop to get addons
-				for(it_ = player_outfits.begin(); it_ != player_outfits.end(); ++it_)
-				{
-					if((*it_)->looktype == (*it)->looktype)
-					{
-						msg->AddByte((*it_)->addons);
-						addedAddon = true;
-						break;
-					}
-				}
-				if(!addedAddon)
-					msg->AddByte(0x00);
-				count_outfits--;
-			}
-		}
-	}
+        // Now we know how many outfits the player can actually choose from
+        msg->AddByte(count_outfits);
+
+        // Let's map the player's outfits for quick lookups (because who has time for loops?)
+        std::unordered_map<uint16_t, uint8_t> playerOutfitsMap;
+        for(const auto& outfit : player->getPlayerOutfits()) {
+            playerOutfitsMap[outfit->looktype] = outfit->addons;
+        }
+
+        // Time to send those fabulous outfits
+        for(auto it = global_outfits.begin(); it != global_outfits.end() && count_outfits > 0; ++it)
+        {
+            if((*it)->premium && player->isPremium() || !(*it)->premium)
+            {
+                // Add outfit looktype and name (so the player knows what they are wearing)
+                msg->AddU16((*it)->looktype);
+                msg->AddString(Outfits::getInstance()->getOutfitName((*it)->looktype));
+
+                // Lookup addons in the map, because why waste time with loops?
+                auto itAddon = playerOutfitsMap.find((*it)->looktype);
+                if(itAddon != playerOutfitsMap.end()) {
+                    msg->AddByte(itAddon->second);  // Add the corresponding addons
+                } else {
+                    msg->AddByte(0x00);  // No addons? No problem, you're still stylish!
+                }
+
+                count_outfits--;
+            }
+        }
+    }
 }
+
 
 void ProtocolGame::sendVIPLogIn(uint32_t guid)
 {

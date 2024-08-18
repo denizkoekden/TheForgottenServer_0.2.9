@@ -29,7 +29,7 @@
 #include "tasks.h"
 #include "scheduler.h"
 
-#include <boost/bind.hpp>
+#include <boost/bind/bind.hpp>
 
 Connection* ConnectionManager::createConnection(boost::asio::io_service& io_service)
 {

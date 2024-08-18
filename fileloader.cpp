@@ -53,73 +53,90 @@ FileLoader::~FileLoader()
 
 bool FileLoader::openFile(const char* filename, bool write, bool caching /*= false*/)
 {
-	if(write)
-	{
-		m_file = fopen(filename, "wb");
-		if(m_file)
-		{
-			uint32_t version = 0;
-			writeData(&version, sizeof(version), false);
-			return true;
-		}
-		else
-		{
-			m_lastError = ERROR_CAN_NOT_CREATE;
-			return false;
-		}
-	}
-	else
-	{
-		m_file = fopen(filename, "rb");
-		if(m_file)
-		{
-			uint32_t version;
-			fread(&version, sizeof(version), 1, m_file);
-			if(version > 0)
-			{
-				fclose(m_file);
-				m_file = NULL;
-				m_lastError = ERROR_INVALID_FILE_VERSION;
-				return false;
-			}
-			else
-			{
-				if(caching)
-				{
-					m_use_cache = true;
-					fseek(m_file, 0, SEEK_END);
-					int32_t file_size = ftell(m_file);
-					m_cache_size = std::min(32768, std::max(file_size/20, 8192)) & ~0x1FFF;
-				}
-				
-				//parse nodes
-				if(safeSeek(4))
-				{
-					delete m_root;
-					m_root = new NodeStruct();
-					m_root->start = 4;
-					int32_t byte;
-					if(safeSeek(4) && readByte(byte) && byte == NODE_START)
-					{
-						bool ret = parseNode(m_root);
-						return ret;
-					}
-					else
-						return false;
-				}
-				else
-				{
-					m_lastError = ERROR_INVALID_FORMAT;
-					return false;
-				}
-			}
-		}
-		else
-		{
-			m_lastError = ERROR_CAN_NOT_OPEN;
-			return false;
-		}
-	}
+    if(write)
+    {
+        m_file = fopen(filename, "wb");
+        if(m_file)
+        {
+            uint32_t version = 0;
+            if (!writeData(&version, sizeof(version), false)) {
+                fclose(m_file);  // Ensure the file is closed on failure
+                m_lastError = ERROR_CAN_NOT_CREATE;
+                return false;
+            }
+            return true;
+        }
+        else
+        {
+            m_lastError = ERROR_CAN_NOT_CREATE;
+            return false;
+        }
+    }
+    else
+    {
+        m_file = fopen(filename, "rb");
+        if(m_file)
+        {
+            uint32_t version;
+            if (fread(&version, sizeof(version), 1, m_file) != 1) {
+                fclose(m_file);  // Close the file before returning
+                m_lastError = ERROR_CAN_NOT_OPEN;
+                return false;
+            }
+            if(version > 0)
+            {
+                fclose(m_file);  // Ensure the file is closed
+                m_file = NULL;
+                m_lastError = ERROR_INVALID_FILE_VERSION;
+                return false;
+            }
+            else
+            {
+                if(caching)
+                {
+                    m_use_cache = true;
+                    fseek(m_file, 0, SEEK_END);
+                    int32_t file_size = ftell(m_file);
+                    m_cache_size = std::min(32768, std::max(file_size/20, 8192)) & ~0x1FFF;
+                    fseek(m_file, 4, SEEK_SET);  // Ensure file position is reset after seeking
+                }
+                
+                // parse nodes
+                if(safeSeek(4))
+                {
+                    delete m_root;
+                    m_root = new NodeStruct();
+                    m_root->start = 4;
+                    int32_t byte;
+                    if(safeSeek(4) && readByte(byte) && byte == NODE_START)
+                    {
+                        bool ret = parseNode(m_root);
+                        if (!ret) {
+                            fclose(m_file);  // Ensure the file is closed on failure
+                        }
+                        return ret;
+                    }
+                    else
+                    {
+                        fclose(m_file);  // Ensure the file is closed on failure
+                        m_lastError = ERROR_INVALID_FORMAT;
+                        return false;
+                    }
+                }
+                else
+                {
+                    fclose(m_file);  // Ensure the file is closed on failure
+                    m_lastError = ERROR_INVALID_FORMAT;
+                    return false;
+                }
+            }
+        }
+        else
+        {
+            m_lastError = ERROR_CAN_NOT_OPEN;
+            return false;
+        }
+    }
 }
 
 bool FileLoader::parseNode(NODE node)

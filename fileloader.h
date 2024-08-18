@@ -271,70 +271,94 @@ protected:
 	const char* end;
 };
 
-class PropWriteStream{
+class PropWriteStream {
 public:
-	PropWriteStream(){buffer = (char*)malloc(32*sizeof(char)); buffer_size = 32; size = 0; memset(buffer, 0, 32*sizeof(char));}
-	~PropWriteStream(){free(buffer);}
+    PropWriteStream() {
+        buffer = (char*)malloc(32 * sizeof(char));
+        buffer_size = 32;
+        size = 0;
+        memset(buffer, 0, 32 * sizeof(char));
+    }
 
-	const char* getStream(uint32_t& _size) const{
-		_size = size;
-		return buffer;
-	}
-	
-	//TODO: might need temp buffer and zero fill the memory chunk allocated by realloc
-	template <typename T>
-	inline void ADD_TYPE(T* add){
-		if((buffer_size - size) < sizeof(T)){
-			buffer_size = buffer_size + ((sizeof(T) + 0x1F) & 0xFFFFFFE0);
-			buffer = (char*)realloc(buffer, buffer_size);
-		}
+    ~PropWriteStream() {
+        free(buffer);
+    }
 
-		memcpy(&buffer[size], (char*)add, sizeof(T));
-		size = size + sizeof(T);
-	}
+    const char* getStream(uint32_t& _size) const {
+        _size = size;
+        return buffer;
+    }
 
-	template <typename T>
-	inline void ADD_VALUE(T add){
-		if((buffer_size - size) < sizeof(T)){
-			buffer_size = buffer_size + ((sizeof(T) + 0x1F) & 0xFFFFFFE0);
-			buffer = (char*)realloc(buffer,buffer_size);
-		}
+    template <typename T>
+    inline void ADD_TYPE(T* add) {
+        ensureCapacity(sizeof(T));
+        memcpy(&buffer[size], (char*)add, sizeof(T));
+        size += sizeof(T);
+    }
 
-		memcpy(&buffer[size], &add, sizeof(T));
-		size = size + sizeof(T);
-	}
+    template <typename T>
+    inline void ADD_VALUE(T add) {
+        ensureCapacity(sizeof(T));
+        memcpy(&buffer[size], &add, sizeof(T));
+        size += sizeof(T);
+    }
 
-	inline void ADD_ULONG(uint32_t ret){
-		ADD_VALUE(ret);
-	}
+    inline void ADD_ULONG(uint32_t ret) {
+        ADD_VALUE(ret);
+    }
 
-	inline void ADD_USHORT(uint16_t ret){
-		ADD_VALUE(ret);
-	}
+    inline void ADD_USHORT(uint16_t ret) {
+        ADD_VALUE(ret);
+    }
 
-	inline void ADD_UCHAR(uint8_t ret){
-		ADD_VALUE(ret);
-	}
+    inline void ADD_UCHAR(uint8_t ret) {
+        ADD_VALUE(ret);
+    }
 
-	inline void ADD_STRING(const std::string& add){
-		uint16_t str_len = add.size();
+    inline void ADD_STRING(const std::string& add) {
+        uint16_t str_len = add.size();
+        ADD_USHORT(str_len);
 
-		ADD_USHORT(str_len);
-
-		if((buffer_size - size) < str_len){
-			buffer_size = buffer_size + ((str_len + 0x1F) & 0xFFFFFFE0);
-			buffer = (char*)realloc(buffer, buffer_size);
-		}
-
-		memcpy(&buffer[size], add.c_str(), str_len);
-		size = size + str_len;
-	}
-
+        ensureCapacity(str_len);
+        memcpy(&buffer[size], add.c_str(), str_len);
+        size += str_len;
+    }
 
 protected:
-	char* buffer;
-	uint32_t buffer_size;
-	uint32_t size;
+    char* buffer;
+    uint32_t buffer_size;
+    uint32_t size;
+
+    void ensureCapacity(size_t additionalSize) {
+        if ((buffer_size - size) < additionalSize) {
+            // Calculate new buffer size with padding and alignment
+            uint32_t new_buffer_size = buffer_size + ((additionalSize + 0x1F) & 0xFFFFFFE0);
+
+            // Allocate temporary buffer to hold current data
+            char* tempBuffer = (char*)malloc(size);
+            if (tempBuffer != nullptr) {
+                memcpy(tempBuffer, buffer, size);
+
+                // Reallocate the buffer with the new size
+                char* newBuffer = (char*)realloc(buffer, new_buffer_size);
+                if (newBuffer != nullptr) {
+                    // Zero-fill the new memory area
+                    memset(newBuffer + buffer_size, 0, new_buffer_size - buffer_size);
+                    buffer = newBuffer;
+                    buffer_size = new_buffer_size;
+                } else {
+                    // Handle realloc failure by restoring the old buffer and size
+                    memcpy(buffer, tempBuffer, size);
+                    free(tempBuffer);
+                    throw std::bad_alloc();  // Throw an exception or handle error
+                }
+
+                free(tempBuffer);
+            } else {
+                throw std::bad_alloc();  // Throw an exception or handle error
+            }
+        }
+    }
 };
 
 #endif

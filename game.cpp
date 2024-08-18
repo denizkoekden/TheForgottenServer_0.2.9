@@ -54,6 +54,7 @@
 #include "database.h"
 #include "server.h"
 
+
 #ifdef __EXCEPTION_TRACER__
 #include "exception.h"
 extern OTSYS_THREAD_LOCKVAR maploadlock;
@@ -3433,7 +3434,7 @@ bool Game::combatChangeHealth(CombatType_t combatType, Creature* attacker, Creat
 				if(textColor != TEXTCOLOR_NONE)
 				{
 					char buffer[10];
-					sprintf(buffer, "%d", damage);
+					snprintf(buffer, sizeof(buffer), "%d", damage);
 					addMagicEffect(list, targetPos, hitEffect);
 					addAnimatedText(list, targetPos, textColor, buffer);
 				}

@@ -70,8 +70,7 @@ Creature()
 		root = xmlDocGetRootElement(doc);
 
 		if(xmlStrcmp(root->name,(const xmlChar*)"npc") != 0){
-			//TODO: use exceptions here
-			std::cerr << "Malformed XML" << std::endl;
+			throw std::runtime_error("Malformed XML: Root element is not 'npc'");
 		}
 
 		int32_t intValue;
