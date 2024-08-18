@@ -46,27 +46,21 @@ jobs:
         cd release
         zip -r ../server_release.zip .
 
-    - name: Upload release assets
+    - name: Upload release assets as artifacts
       uses: actions/upload-artifact@v2
       with:
         name: server_release
         path: server_release.zip
 
-    - name: Create GitHub Release
+    - name: Create GitHub Release with attached assets
       id: create_release
-      uses: actions/create-release@v1
+      uses: ncipollo/release-action@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: 'v1.0.${{ github.run_number }}'
+        tag: 'v1.0.${{ github.run_number }}'
         release_name: 'Server Release v1.0.${{ github.run_number }}'
         draft: false
         prerelease: false
-
-    - name: Upload Release Asset to GitHub Release
-      uses: actions/upload-release-asset@v1
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./server_release.zip
-        asset_name: server_release.zip
-        asset_content_type: application/zip
+        artifacts: server_release.zip
+        artifact_name: server_release.zip
